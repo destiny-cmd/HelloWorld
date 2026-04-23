@@ -189,7 +189,7 @@ fatal: You are not currently on a branch
 
 ### 放弃 Obsidian Git 插件，改用脚本
 
-手机端 Obsidian Git 插件一直报错：
+手机端 Obsidian Git （安装路径设置 → 关掉安全→ 模式第三方插件 → 浏览社区插件市场找到 → 找到**Git**插件）（设置在最右下角的齿轮）一直报错：
 
 ```
 Could not find a fetch refspec for remote "origin"
@@ -261,7 +261,13 @@ git push
 | 电脑写完   | Obsidian Git 插件每10分钟自动同步<br>(可以在 Obsidian 里用命令面板手动触发：`Ctrl+P` → 搜索 `git` → 点 **Git: Commit and sync** 立刻同步) |
 | 手机写完日记 | Termux 运行 `~/sync-diary.sh`                                                                                 |
 | 手机写完笔记 | Termux 运行 `~/sync-marxism.sh`                                                                               |
-
+附：
+Git 最核心的日常命令
+- `git add .` — 把所有改动打包准备提交
+- `git commit -m "..."` — 给这次改动写个备注，正式存档
+- `git pull` — 把远程最新内容拉下来
+- `git push` — 把本地内容推送到远程
+- `git config pull.rebase false` — 遇到冲突时用合并方式解决（只需设置一次）
 ---
 
 ## 感想
