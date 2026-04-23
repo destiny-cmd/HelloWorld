@@ -1,4 +1,4 @@
-
+# HelloWorld — 我的第一次 Git 折腾记录
 > 2026-04-23，和 Claude 折腾了一整天，终于搞定了 Git + GitHub + Obsidian 全平台同步。
 
 ---
