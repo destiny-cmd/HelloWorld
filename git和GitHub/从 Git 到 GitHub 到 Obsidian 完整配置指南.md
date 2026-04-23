@@ -214,5 +214,3 @@ chmod +x ~/sync.sh
 > 全世界无产者，联合起来！✊
 
 ---
-
-满意的话把这个复制到 `C:\FOR WORKING\HelloWorld\README.md` 里，电脑端会自动同步到 GitHub！😄
