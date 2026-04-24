@@ -1,4 +1,4 @@
-从 Git 到 GitHub 到 Obsidian 完整配置指南
+从 Git 到 GitHub 到 Obsidian+vscode 完整配置指南
 ---
 
 > 本文是真实配置过程的记录，包含踩过的坑和解决方法，适合零基础的同学参考(其实我才是零基础的零基础）。
@@ -198,6 +198,69 @@ chmod +x ~/sync.sh
 ```bash
 ~/sync.sh
 ```
+### 五、用 VSCode + Git 提交代码文件
+
+> 适用于需要同时管理 `.md` 文章、`.py` 代码、图片等多种文件类型的仓库。
+
+#### 1. 安装 VSCode
+
+去 [code.visualstudio.com](https://code.visualstudio.com) 下载安装，安装时勾选 **Add to PATH**。
+
+推荐安装两个插件：
+
+- **Chinese (Simplified)**：界面汉化
+- **Markdown Preview Enhanced**：实时预览 `.md` 文件
+
+#### 2. 打开仓库
+
+File → Open Folder → 选择本地仓库文件夹。
+
+左侧源代码管理图标会显示 git 已识别仓库。
+
+#### 3. 安装 Python 依赖
+
+在 VSCode 终端（Ctrl+`）输入：
+
+bash
+
+```bash
+pip install matplotlib pdfplumber
+```
+
+#### 4. 日常提交流程
+
+bash
+
+```bash
+git add .
+git commit -m "简洁描述这次改了什么"
+git push
+```
+
+#### 5. 压缩历史 commit
+
+如果前几次提交 message 比较乱，可以压缩成一条：
+
+bash
+
+```bash
+git reset --soft 最早那条commit的hash
+git add .
+git commit -m "init: 描述"
+git push --force
+```
+
+> ⚠️ **坑7**：`git push --force` 会覆盖远程历史，个人仓库可用，多人协作仓库禁止使用。
+
+> ⚠️ **坑8**：做 `git rebase` 操作前务必关闭 Obsidian，否则 Obsidian 后台自动修改的 `workspace.json` 会导致 rebase 冲突无法继续也无法中止。
+
+#### 6. commit message 写作建议
+
+|场景|示例|
+|---|---|
+|初次提交|`init: add article and code`|
+|修改文章|`update: 修订第四节措辞`|
+|修复代码|`fix: 修正年份提取正则`|
 
 ---
 
@@ -208,6 +271,7 @@ chmod +x ~/sync.sh
 | 电脑写完自动同步 | Obsidian Git 插件，每10分钟自动执行<br>(可以在 Obsidian 里用命令面板手动触发：`Ctrl+P` → 搜索 `git` → 点 **Git: Commit and sync** 立刻同步) |
 | 手机写完同步   | 打开 Termux，运行 `~/sync.sh`                                                                                     |
 | 拉取最新内容   | 脚本里的 `git pull` 自动处理                                                                                         |
+| vscode提交 | 在vscode终端运行：<br>`git add .`<br>`git commit -m "简洁描述这次改了什么"`<br>`git push`                                    |
 
 ---
 > 全世界无产者，联合起来！✊
