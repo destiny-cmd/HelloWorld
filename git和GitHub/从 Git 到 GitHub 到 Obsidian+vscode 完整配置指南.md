@@ -95,7 +95,10 @@ git clone https://github.com/用户名/仓库名.git
 ```
 
 > 第一次 clone 会弹出 GitHub 登录窗口，点 **Sign in with your browser** 完成认证即可。
-
+> 千万不要忘记在clone 前面敲git
+> 否则会
+> ![[Pasted image 20260428174114.png|376]]
+>
 ### 4. Obsidian 打开仓库
 
 1. 打开 Obsidian
