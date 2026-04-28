@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "SQL/实验日志 · 表与视图的基本操作.md",
+                "file": "git和GitHub/从 Git 到 GitHub 到 Obsidian+vscode 完整配置指南.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "实验日志 · 表与视图的基本操作"
+              "title": "从 Git 到 GitHub 到 Obsidian+vscode 完整配置指南"
             }
           }
         ],
@@ -93,7 +93,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "69999870edc442ad",
@@ -212,8 +213,8 @@
   },
   "active": "07cc0ff7125bbcf3",
   "lastOpenFiles": [
-    "git和GitHub/从 Git 到 GitHub 到 Obsidian+vscode 完整配置指南.md",
     "SQL/实验日志 · 表与视图的基本操作.md",
+    "git和GitHub/从 Git 到 GitHub 到 Obsidian+vscode 完整配置指南.md",
     "git和GitHub/VSCode + Git 上传文件记录 — 我的第二次Git折腾.md",
     "git和GitHub/HelloWorld — 我的第一次 Git 折腾记录.md",
     "git和GitHub/未命名.md",
