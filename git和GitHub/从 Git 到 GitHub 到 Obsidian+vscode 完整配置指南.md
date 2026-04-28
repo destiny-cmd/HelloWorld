@@ -274,4 +274,4 @@ git push --force
 | vscode提交 | 在vscode终端运行：<br>`git add .`<br>`git commit -m "简洁描述这次改了什么"`<br>`git push`                                    |
 
 ---
-> 全世界无产者，联合起来！✊
+全世界无产者，联合起来！✊
