@@ -109,14 +109,14 @@ sudo systemctl status tomcat9    # 看到 active (running) 就对了
 
 ## 五、常用 systemctl 命令速查
 
-| 操作   | 命令                               |     |
-| ---- | -------------------------------- | --- |
-| 启动服务 | `sudo systemctl start tomcat9`   |     |
-| 停止服务 | `sudo systemctl stop tomcat9`    |     |
-| 重启服务 | `sudo systemctl restart tomcat9` |     |
-| 查看状态 | `sudo systemctl status tomcat9`  |     |
-| 开机自启 | `sudo systemctl enable tomcat9`  |     |
-| 禁止自启 | `sudo systemctl disable tomcat9` |     |
+|操作|命令|
+|---|---|
+|启动服务|`sudo systemctl start tomcat9`|
+|停止服务|`sudo systemctl stop tomcat9`|
+|重启服务|`sudo systemctl restart tomcat9`|
+|查看状态|`sudo systemctl status tomcat9`|
+|开机自启|`sudo systemctl enable tomcat9`|
+|禁止自启|`sudo systemctl disable tomcat9`|
 
 ---
 
@@ -135,7 +135,152 @@ exit;
 
 ---
 
-## 七、Python 和 C 语言环境
+## 七、MariaDB 数据库使用指南
+
+### 7.1 启动与登录
+
+```bash
+# 检查数据库是否在跑
+sudo systemctl status mariadb
+
+# 没跑就启动
+sudo systemctl start mariadb
+
+# 登录数据库（初次无需密码）
+sudo mysql -u root
+
+# 退出数据库
+exit;
+```
+
+### 7.2 创建数据库和用户
+
+```sql
+-- 登录后执行（提示符变成 MariaDB [(none)]> ）
+CREATE DATABASE mydb;
+CREATE USER 'myuser'@'localhost' IDENTIFIED BY '123456';
+GRANT ALL PRIVILEGES ON mydb.* TO 'myuser'@'localhost';
+FLUSH PRIVILEGES;
+USE mydb;
+```
+
+### 7.3 建表和 CRUD 操作
+
+```sql
+-- 建表
+CREATE TABLE students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    age INT,
+    grade VARCHAR(10)
+);
+
+-- 插入数据
+INSERT INTO students (name, age, grade) VALUES ('张三', 20, 'A');
+INSERT INTO students (name, age, grade) VALUES ('李四', 21, 'B');
+INSERT INTO students (name, age, grade) VALUES ('王五', 19, 'A');
+
+-- 查询
+SELECT * FROM students;
+SELECT * FROM students WHERE grade = 'A';
+
+-- 更新
+UPDATE students SET age = 22 WHERE name = '张三';
+
+-- 删除
+DELETE FROM students WHERE name = '王五';
+
+-- 查看表结构
+DESC students;
+```
+
+### 7.4 用 Java 连接数据库（JDBC）
+
+先在终端安装 JDBC 驱动：
+
+```bash
+sudo apt install libmariadb-java -y
+```
+
+驱动 jar 位置：`/usr/share/java/mariadb-java-client.jar`
+
+### 7.5 在 Geany 里写 Java + 数据库的项目
+
+#### 第一步：创建项目目录
+
+```bash
+mkdir ~/java-db-demo && cd ~/java-db-demo
+```
+
+#### 第二步：打开 Geany，写一个 Java 类
+
+左下角开始菜单 → 搜 **Geany** → 打开
+
+点 **新建** → 写下面的代码 → 保存为 `StudentDAO.java`：
+
+```java
+import java.sql.*;
+
+public class StudentDAO {
+    public static void main(String[] args) {
+        String url = "jdbc:mariadb://localhost:3306/mydb";
+        String user = "myuser";
+        String password = "123456";
+
+        try {
+            // 加载驱动
+            Class.forName("org.mariadb.jdbc.Driver");
+
+            // 连接数据库
+            Connection conn = DriverManager.getConnection(url, user, password);
+            System.out.println("数据库连接成功！");
+
+            // 查询
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM students");
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int age = rs.getInt("age");
+                String grade = rs.getString("grade");
+                System.out.println(id + " | " + name + " | " + age + " | " + grade);
+            }
+
+            rs.close();
+            stmt.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+#### 第三步：在 Geany 里编译运行
+
+1. Geany 菜单栏 → **生成** → **设置生成命令**
+2. 在 **Compile** 那行填：
+
+```
+javac -cp .:/usr/share/java/mariadb-java-client.jar "%f"
+```
+
+3. 在 **Execute** 那行填：
+
+```
+java -cp .:/usr/share/java/mariadb-java-client.jar "%e"
+```
+
+4. 点 **确定**
+5. 按 **F8** 编译 → 按 **F5** 运行
+
+终端会显示查询结果。
+
+---
+
+## 八、Python 和 C 语言环境
 
 |语言|验证命令|
 |---|---|
@@ -149,7 +294,7 @@ exit;
 
 ---
 
-## 八、装 QQ 和输入法
+## 九、装 QQ 和输入法
 
 ### QQ Linux 版
 
@@ -175,7 +320,7 @@ reboot
 
 ---
 
-## 九、今天学到的排查思路
+## 十、今天学到的排查思路
 
 ```
 日志说啥 → 顺着路径查 → 定位到具体脚本/配置 → 小改动解决
@@ -191,7 +336,7 @@ reboot
 
 ---
 
-## 十、终端小技巧
+## 十一、终端小技巧
 
 |问题|答案|
 |---|---|
@@ -205,20 +350,62 @@ reboot
 
 ---
 
-## 十一、Java Web 开发第一步（明天搞）
+## 十二、Java Web 开发第一步（明天搞）
 
-### Hello Servlet 流程
+### 12.1 用 Geany 写纯 Java + 数据库
 
-```bash
-# 1. 确认 Tomcat 在跑
-sudo systemctl status tomcat9
+**第一步：设置 Geany 编译命令**
 
-# 2. 创建项目目录
-mkdir ~/hello-web && cd ~/hello-web
+打开 Geany → 菜单栏 **生成** → **设置生成命令**：
 
-# 3. 写一个 HelloServlet.java
-gedit HelloServlet.java
+|命令|内容|
+|---|---|
+|Compile|`javac -cp .:/usr/share/java/mariadb-java-client.jar "%f"`|
+|Execute|`java -cp .:/usr/share/java/mariadb-java-client.jar "%e"`|
+
+点确定。
+
+**第二步：新建文件，写 JDBC 代码**
+
+```java
+import java.sql.*;
+
+public class TestDB {
+    public static void main(String[] args) {
+        String url = "jdbc:mariadb://localhost:3306/mydb";
+        String user = "myuser";
+        String password = "123456";
+
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(url, user, password);
+            System.out.println("✅ 数据库连接成功！");
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM students");
+
+            while (rs.next()) {
+                System.out.println(rs.getInt("id") + " | " 
+                    + rs.getString("name") + " | " 
+                    + rs.getInt("age") + " | " 
+                    + rs.getString("grade"));
+            }
+
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
 ```
+
+按 **F8** 编译，按 **F5** 运行。
+
+### 12.2 Hello Servlet（纯 Web）
+
+打开 Geany → 新建 → 写下面代码 → 保存为 `HelloServlet.java`：
 
 ```java
 import javax.servlet.*;
@@ -237,15 +424,24 @@ public class HelloServlet extends HttpServlet {
 }
 ```
 
+**Geany 编译命令设置：**
+
+|命令|内容|
+|---|---|
+|Compile|`javac -cp /usr/share/tomcat9/lib/servlet-api.jar "%f"`|
+|Execute|（不用设，Servlet 是部署到 Tomcat 的）|
+
+**部署：**
+
 ```bash
-# 4. 编译
+# 编译
 javac -cp /usr/share/tomcat9/lib/servlet-api.jar HelloServlet.java
 
-# 5. 创建 Web 应用目录
+# 部署
 sudo mkdir -p /var/lib/tomcat9/webapps/hello/WEB-INF/classes
 sudo cp HelloServlet.class /var/lib/tomcat9/webapps/hello/WEB-INF/classes/
 
-# 6. 写 web.xml
+# web.xml
 sudo nano /var/lib/tomcat9/webapps/hello/WEB-INF/web.xml
 ```
 
@@ -255,16 +451,92 @@ sudo nano /var/lib/tomcat9/webapps/hello/WEB-INF/web.xml
 ```
 
 ```bash
-# 7. 重启 Tomcat
+# 重启 Tomcat
 sudo systemctl restart tomcat9
 
-# 8. 浏览器打开
+# 浏览器打开
 # http://localhost:8080/hello/hello
 ```
 
+### 12.3 Servlet 查询数据库（实战）
+
+创建一个从数据库读数据并显示在网页上的 Servlet：
+
+```java
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
+import java.io.*;
+import java.sql.*;
+
+@WebServlet("/students")
+public class StudentServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        
+        resp.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = resp.getWriter();
+        
+        out.println("<!DOCTYPE html>");
+        out.println("<html><head><meta charset='UTF-8'><title>学生列表</title></head><body>");
+        out.println("<h1>学生列表（来自数据库）</h1>");
+        out.println("<table border='1'><tr><th>ID</th><th>姓名</th><th>年龄</th><th>成绩</th></tr>");
+
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(
+                "jdbc:mariadb://localhost:3306/mydb", "myuser", "123456");
+            
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM students");
+
+            while (rs.next()) {
+                out.println("<tr>");
+                out.println("<td>" + rs.getInt("id") + "</td>");
+                out.println("<td>" + rs.getString("name") + "</td>");
+                out.println("<td>" + rs.getInt("age") + "</td>");
+                out.println("<td>" + rs.getString("grade") + "</td>");
+                out.println("</tr>");
+            }
+
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            out.println("<p style='color:red'>错误：" + e.getMessage() + "</p>");
+        }
+
+        out.println("</table></body></html>");
+    }
+}
+```
+
+**编译 + 部署 + 重启：**
+
+```bash
+# Geany 编译命令：javac -cp /usr/share/tomcat9/lib/servlet-api.jar:/usr/share/java/mariadb-java-client.jar "%f"
+javac -cp /usr/share/tomcat9/lib/servlet-api.jar:/usr/share/java/mariadb-java-client.jar StudentServlet.java
+
+sudo cp StudentServlet.class /var/lib/tomcat9/webapps/hello/WEB-INF/classes/
+sudo cp /usr/share/java/mariadb-java-client.jar /var/lib/tomcat9/lib/
+
+sudo systemctl restart tomcat9
+
+# 浏览器打开 http://localhost:8080/hello/students
+```
+
+### 12.4 Geany 编译命令速查
+
+|项目类型|Compile 命令|
+|---|---|
+|纯 Java|`javac "%f"`|
+|Java + 数据库|`javac -cp .:/usr/share/java/mariadb-java-client.jar "%f"`|
+|Servlet|`javac -cp /usr/share/tomcat9/lib/servlet-api.jar "%f"`|
+|Servlet + 数据库|`javac -cp /usr/share/tomcat9/lib/servlet-api.jar:/usr/share/java/mariadb-java-client.jar "%f"`|
+
 ---
 
-## 十二、这台机器的体感评价
+## 十三、这台机器的体感评价
 
 |能干什么|不能干什么|
 |---|---|
