@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "老上网本复活指南：Acer AO532h + Lubuntu 22.04.md",
+                "file": "Java Web/在 Eclipse 中创建 Web 项目.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "老上网本复活指南：Acer AO532h + Lubuntu 22.04"
+              "title": "在 Eclipse 中创建 Web 项目"
             }
           }
         ],
@@ -227,6 +227,7 @@
   "active": "ea9b919c999bf8ab",
   "lastOpenFiles": [
     "Java Web/Java 开发环境 + JSP + JDBC.md",
+    "Java Web/在 Eclipse 中创建 Web 项目.md",
     "老上网本复活指南：Acer AO532h + Lubuntu 22.04.md",
     "其他/OMS 存档电力修复指南.md",
     "其他/如何配置 Claude Code 并接入 DeepSeek.md",
