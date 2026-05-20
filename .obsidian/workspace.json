@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Java Web/在liunx上运行JavaBean.md",
+                "file": "Java Web/在 Eclipse 中创建 Web 项目.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "在liunx上运行JavaBean"
+              "title": "在 Eclipse 中创建 Web 项目"
             }
           }
         ],
@@ -226,8 +226,8 @@
   },
   "active": "ea9b919c999bf8ab",
   "lastOpenFiles": [
-    "SQL/SQL 学习笔记 ——一个被SQL Server折磨过的人写的.md",
     "Java Web/在liunx上运行JavaBean.md",
+    "SQL/SQL 学习笔记 ——一个被SQL Server折磨过的人写的.md",
     "未命名.md",
     "Java Web/在 Eclipse 中创建 Web 项目.md",
     "Java Web/Java 开发环境 + JSP + JDBC.md",
