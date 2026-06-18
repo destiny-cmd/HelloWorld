@@ -339,6 +339,9 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '新密码';
 exit
 net start MySQL80
 ```
+更新
+[MySQL密码遗忘解决方案：从零开始快速重置root密码_mysql -u root -p 密码-CSDN博客](https://blog.csdn.net/m0_74972979/article/details/156116344)
+这个网站有着完全的方案，完全可以解决问题
 
 ---
 
