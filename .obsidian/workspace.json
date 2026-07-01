@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "SQL/一些关于powerdesign使用的问题.md",
+                "file": "SQL/逻辑设计与物理实现.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "一些关于powerdesign使用的问题"
+              "title": "逻辑设计与物理实现"
             }
           }
         ],
@@ -240,13 +240,17 @@
   },
   "active": "74a03bf86c417401",
   "lastOpenFiles": [
+    "SQL/需求分析与概念设计.md",
+    "SQL/实验日志 · 表与视图的基本操作.md",
+    "SQL/MySQL核心技术.md",
+    "SQL/逻辑设计与物理实现.md",
+    "SQL/一些关于powerdesign使用的问题.md",
     "Pasted image 20260629164440.png",
     "Pasted image 20260629164313.png",
     "Pasted image 20260629163849.png",
     "Pasted image 20260629152833.png",
     "Pasted image 20260629152656.png",
     "其他/如何找到软件位置.md",
-    "SQL/一些关于powerdesign使用的问题.md",
     "编程农场/一些基础的东西.md",
     "Java Web/Navicat15的激活.md",
     "编程农场",
@@ -275,7 +279,6 @@
     "install-current-user.vbs",
     "Java Web",
     "其他",
-    "SQL/实验日志 · 表与视图的基本操作.md",
     "git和GitHub/未命名.md",
     "SQL",
     "README.md",
